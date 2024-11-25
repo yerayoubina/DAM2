@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de conexión -->
+        <property name="hibernate.connection.url">jdbc:mariadb://localhost:3306/pruebas</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+
+        <!-- Dialecto de Hibernate para MariaDB -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
+
+        <!-- Configuración adicional -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Mapear clases (opcional, pero recomendado si no usas anotaciones) -->
+
+
+        <mapping class="com.openwebinars.hibernate.User"/>
+    </session-factory>
+</hibernate-configuration>
