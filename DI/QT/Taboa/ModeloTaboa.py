@@ -7,10 +7,10 @@ class ModeloTaboa(QAbstractTableModel):
         super().__init__()
         self.taboa = taboa
 
-    def rowCount(self, indice):
+    def rowCount(self, _):
         return len(self.taboa)
 
-    def columnCount(self, indice):
+    def columnCount(self, _):
         return len(self.taboa[0])
 
     def data(self, indice, rol):
