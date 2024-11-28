@@ -16,7 +16,14 @@ public class GuardaCliente {
             ss.save(c1);
             ss.getTransaction().commit();
 
-            System.out.println("Nuevo registro en la base de datos:\n "+  c1.toString());
+            //System.out.println("Nuevo registro en la base de datos:\n "+  c1.toString());
+
+            //LECTURA REGISTRO
+            Clientes clienteInsertado = ss.get(Clientes.class, c1.getId());
+            System.out.println("Registro: " + clienteInsertado);
+            ss.getTransaction().commit();
+            System.out.println("TERMINADO");
+
             ss.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());

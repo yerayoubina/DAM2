@@ -2,10 +2,7 @@ package com.dam.conexionHIbernate;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 // DECLARA ENTIDAD Y POSIBILITA EL MAPEO
 @Entity
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 public class Clientes {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "nombre")
