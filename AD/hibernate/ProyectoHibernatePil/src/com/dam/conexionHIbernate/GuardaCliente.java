@@ -10,7 +10,7 @@ public class GuardaCliente {
         try (SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Clientes.class).buildSessionFactory()) {
             Session ss = sf.openSession();
 
-            Clientes c1 = new Clientes("Juan", "Diaz", "Gran via");
+            Clientes c1 = new Clientes("Pondal", "Delgado", "Julian");
 
             ss.beginTransaction();
             ss.save(c1);
