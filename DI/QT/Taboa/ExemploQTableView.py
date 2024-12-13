@@ -94,7 +94,6 @@ class ExemploQTableView(QMainWindow):
         self.txtDni.clear()
         self.cmbXenero.setCurrentIndex(0)
         self.chkFalecido.setChecked(False)
-
     '''
 
 app = QApplication(sys.argv)
