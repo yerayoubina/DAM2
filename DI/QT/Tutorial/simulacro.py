@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Gestión de Tareas")
         self.setGeometry(100, 100, 600, 400)
 
-        # Layout principal
+        # Layout principall vertical
         main_layout = QVBoxLayout()
 
         # Formulario de datos básicos
