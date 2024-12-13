@@ -25,13 +25,12 @@ class MainWindow(QMainWindow):
         self.form_layout.addWidget(self.nombre_input)
         self.form_layout.addWidget(self.edad_label)
         self.form_layout.addWidget(self.edad_input)
-
         main_layout.addLayout(self.form_layout)
 
         # Tabla de tareas
         self.tareas_table = QTableWidget()
-        self.tareas_table.setColumnCount(1)
-        self.tareas_table.setHorizontalHeaderLabels(["Tareas"])
+        self.tareas_table.setColumnCount(10)
+        self.tareas_table.setHorizontalHeaderLabels(["Tareas","Cliente"])
         self.tareas_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         main_layout.addWidget(self.tareas_table)
 
