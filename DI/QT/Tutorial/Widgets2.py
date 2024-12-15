@@ -21,8 +21,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Check Box")
         label = QLabel("Esto es un checkcbox de label")
         checkbox = QCheckBox(label.text())
-
         checkbox.stateChanged.connect(self.show_stateCHECKBOX)
+        mainLayout.addWidget(checkbox)
 
     ## COMBO BOX
         combobox = QComboBox()
