@@ -1,11 +1,8 @@
 import sys
-from inspect import trace
-from tkinter.ttk import Combobox
-from trace import Trace
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QFormLayout, QLineEdit, QWidget, QApplication, QComboBox, \
-    QCheckBox, QRadioButton, QHBoxLayout, QGridLayout, QLabel, QListWidget, QPushButton, QMessageBox
+    QCheckBox, QRadioButton, QHBoxLayout, QGridLayout, QLabel, QListWidget, QPushButton, QMessageBox, QButtonGroup
 
 
 class MainWindow(QMainWindow):
@@ -31,7 +28,7 @@ class MainWindow(QMainWindow):
         self.input_Edad = QCheckBox("Mayor de 18 años")
         self.input_Terminos = QRadioButton("Acepta los terminos")
         self.input_Terminos.setChecked(True)
-        self.input_tareas = QLineEdit()
+        self.input_email = QLineEdit()
 
 
 
@@ -53,10 +50,24 @@ class MainWindow(QMainWindow):
         #self.labelTitutloTareas.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutTareas.setContentsMargins(0,20,0,0)
         self.tareasList = QListWidget()
-        self.input_tareas.setPlaceholderText("Añade una tarea")
+        self.input_email.setPlaceholderText("Introduce el email")
         self.btn_add = QPushButton("Añadir")
         self.btn_edit = QPushButton("Editar")
         self.btn_delete = QPushButton("Borrar")
+
+
+        self.button_group = QButtonGroup()
+        self.radio1 = QRadioButton("HTML")
+        self.radio2 = QRadioButton("Texto Plano")
+        self.radio3 = QRadioButton("Personalizado")
+        self.button_group.addButton(self.radio1)
+        self.button_group.addButton(self.radio2)
+        self.button_group.addButton(self.radio3)
+
+
+
+
+
 
     # Posicionamiento grid
         self.gridLayoutTareas.addWidget(self.labelTitutloTareas,0,1,1,3)
@@ -64,12 +75,19 @@ class MainWindow(QMainWindow):
         self.gridLayoutTareas.addWidget(self.btn_add, 1,3)
         self.gridLayoutTareas.addWidget(self.btn_edit, 2,3)
         self.gridLayoutTareas.addWidget(self.btn_delete, 3,3)
-        self.gridLayoutTareas.addWidget(self.input_tareas,6,0,1,2)
+        self.gridLayoutTareas.addWidget(self.radio1,4,3)
+        self.gridLayoutTareas.addWidget(self.radio2,5,3)
+        self.gridLayoutTareas.addWidget(self.radio3,6,3)
+
+        self.gridLayoutTareas.addWidget(self.input_email, 6, 0, 1, 2)
 
     # Conexiones btn
         self.btn_add.clicked.connect(self.btn_anadir)
         self.btn_edit.clicked.connect(self.btn_editar)
         self.btn_delete.clicked.connect(self.btn_borrar)
+
+    # Conectar la lista de tareas para que llame al método cuando se seleccione un item
+        self.tareasList.itemClicked.connect(self.observerFields)
 
 
         self.mainLayout.addLayout(self.gridLayoutTareas)
@@ -80,13 +98,41 @@ class MainWindow(QMainWindow):
 
     # FUNCIONES
     def btn_anadir(self):
-        tarea = self.input_tareas.text()
-        if tarea == '':
+        user = self.createUser()
+        if Usuario is None:
             print("campo vacio")
-            self.Info("No se puede añadir tareas vacías")
+            self.Info("No se puede añadir usuario sin datos")
         else:
-            self.tareasList.addItem(tarea)
-            self.input_tareas.clear()
+            self.tareasList.addItem(user.__toString__())
+
+
+
+
+    def btn_editar(self):
+        user = self.createUser()
+        if self.tareasList.currentItem() is None:
+            self.Info("No hay ninguan usuario seleccionada para editar")
+            return
+        self.tareasList.currentItem().setText(user.__toString__())
+        self.clearField()
+
+    def btn_borrar(self):
+        if self.tareasList.currentItem() is None:
+            self.Info("No se ha seleccionado ninguna usuario")
+            return
+
+        self.tareasList.takeItem(self.tareasList.row(self.tareasList.currentItem()))
+
+
+    def clearField(self):
+        self.input_Nome.clear()
+        self.input_email.clear()
+        self.input_Apellido.clear()
+        self.input_Usuario.clear()
+
+    def createUser(self):
+        return Usuario(self.input_Nome.text(), self.input_Apellido.text(), self.input_Usuario.text(),
+        self.input_email.text())
 
     def Info(self, str):
         msg = QMessageBox()
@@ -95,24 +141,29 @@ class MainWindow(QMainWindow):
         msg.setIcon(QMessageBox.Icon.Warning)
         msg.exec()
 
-    def btn_editar(self):
-        tarea_seleccionada = self.tareasList.currentItem()
+    def observerFields(self):
+        if self.tareasList.currentItem() is not None:
+            user = self.createUser(None, None, None, None)
 
-        if tarea_seleccionada is None:
-            self.Info("No hay ninguan tarea seleccionada para editar")
-            return
-        tarea_seleccionada.setText(self.input_tareas.text())
-        self.input_tareas.clear()
+            user_data = self.tareasList.currentItem().text().split(', ')
+            user = self.createUser(user_data[0], user_data[1],user_data[2],user_data[3])
 
-    def btn_borrar(self):
-        if self.tareasList.currentItem() is None:
-            self.Info("No se ha seleccionado ninguna tarea")
-            return
-
-        self.tareasList.takeItem(self.tareasList.row(self.tareasList.currentItem()))
+            self.input_Nome.setText(user.nombre)
+            self.input_Apellido.setText(user.apellido)
+            self.input_Usuario.setText(user.usuario)
+            self.input_email.setText(user.email)
 
 
 
+class Usuario:
+    def __init__(self, nombre, apellido, usuario, email):
+            self.nombre = nombre
+            self.apellido = apellido
+            self.usuario = usuario
+            self.email = email
+
+    def __toString__(self):
+        return f"{self.nombre}, {self.apellido}, {self.usuario}, {self.email}"
 
 app = QApplication(sys.argv)
 window = MainWindow()
