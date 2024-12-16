@@ -15,12 +15,9 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(self.button)
 
-
     def the_botton_was_clicked(self):
         self.button.setText("You alreade clicked me.")
         self.button.setEnabled(False)
-
-
         #Also change the window title
         self.setWindowTitle("My oneshot App")
 

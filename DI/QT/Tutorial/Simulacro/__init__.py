@@ -65,10 +65,6 @@ class MainWindow(QMainWindow):
         self.button_group.addButton(self.radio3)
 
 
-
-
-
-
     # Posicionamiento grid
         self.gridLayoutTareas.addWidget(self.labelTitutloTareas,0,1,1,3)
         self.gridLayoutTareas.addWidget(self.tareasList,1,0,5,3)
@@ -90,7 +86,6 @@ class MainWindow(QMainWindow):
         self.tareasList.itemClicked.connect(self.observerFields)
 
 
-        self.mainLayout.addLayout(self.gridLayoutTareas)
         self.mainLayout.addLayout(self.formLayoutDatos)
         container.setLayout(self.mainLayout)
         self.setCentralWidget(container)
@@ -99,22 +94,23 @@ class MainWindow(QMainWindow):
     # FUNCIONES
     def btn_anadir(self):
         user = self.createUser()
-        if Usuario is None:
+        if user is None:
             print("campo vacio")
             self.Info("No se puede añadir usuario sin datos")
         else:
             self.tareasList.addItem(user.__toString__())
-
-
+            self.clearField()
 
 
     def btn_editar(self):
         user = self.createUser()
+        self.observerFields()
         if self.tareasList.currentItem() is None:
             self.Info("No hay ninguan usuario seleccionada para editar")
             return
         self.tareasList.currentItem().setText(user.__toString__())
         self.clearField()
+        self.tareasList.clearSelection()
 
     def btn_borrar(self):
         if self.tareasList.currentItem() is None:
@@ -143,15 +139,11 @@ class MainWindow(QMainWindow):
 
     def observerFields(self):
         if self.tareasList.currentItem() is not None:
-            user = self.createUser(None, None, None, None)
-
             user_data = self.tareasList.currentItem().text().split(', ')
-            user = self.createUser(user_data[0], user_data[1],user_data[2],user_data[3])
-
-            self.input_Nome.setText(user.nombre)
-            self.input_Apellido.setText(user.apellido)
-            self.input_Usuario.setText(user.usuario)
-            self.input_email.setText(user.email)
+            self.input_Nome.setText(user_data[0])
+            self.input_Apellido.setText(user_data[1])
+            self.input_Usuario.setText(user_data[2])
+            self.input_email.setText(user_data[3])
 
 
 
