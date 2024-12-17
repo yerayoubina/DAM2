@@ -1,3 +1,4 @@
+import os
 import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
@@ -150,6 +151,34 @@ class FiestraPrincipal(QMainWindow):
     def eliminar_ficheiro(self):
         self.tedCadroTexto.clear()  # Vaciar el QTextEdit como ejemplo
         QMessageBox.information(self, "Eliminar Ficheiro", "Ficheiro eliminado.")
+
+        def eliminar_ficheiro(self):
+            # Abrir un cuadro de diálogo para seleccionar un fichero a eliminar
+            ruta_fichero, _ = QFileDialog.getOpenFileName(
+                self,
+                "Seleccionar Ficheiro para Eliminar",  # Título del diálogo
+                "",  # Directorio inicial
+                "Todos os arquivos (*)"  # Filtros
+            )
+
+            if ruta_fichero:  # Si se seleccionó un fichero
+                # Confirmación antes de eliminar
+                respuesta = QMessageBox.question(
+                    self,
+                    "Confirmar Eliminación",
+                    f"Estás seguro de que queres eliminar o ficheiro?\n{ruta_fichero}",
+                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+                )
+
+                if respuesta == QMessageBox.StandardButton.Yes:
+                    try:
+                        # Eliminar el fichero
+                        os.remove(ruta_fichero)
+                        QMessageBox.information(self, "Ficheiro Eliminado",
+                                                f"Ficheiro eliminado correctamente:\n{ruta_fichero}")
+                    except Exception as e:
+                        # Manejar errores durante la eliminación
+                        QMessageBox.critical(self, "Erro ao Eliminar", f"Non se pode eliminar o ficheiro:\n{str(e)}")
 
     def saltar_a_opcion(self):
         opcion = self.cmbSaltar.currentText()
