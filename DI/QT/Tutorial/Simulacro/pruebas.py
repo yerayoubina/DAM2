@@ -3,7 +3,7 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QTextEdit, QPushButton, QCheckBox, QComboBox, QSlider, QDial,
-    QLabel, QGroupBox, QVBoxLayout, QHBoxLayout, QGridLayout, QWidget, QMessageBox, QFileDialog
+    QLabel, QGroupBox, QVBoxLayout, QHBoxLayout, QGridLayout, QWidget, QMessageBox, QFileDialog, QListWidget
 )
 
 
@@ -15,7 +15,7 @@ class FiestraPrincipal(QMainWindow):
         self.setGeometry(100, 100, 800, 600)
 
         # Crear widgets
-        self.tedCadroTexto = QTextEdit()
+        self.tedCadroTexto = QListWidget()
 
         self.btnAbrirFich = QPushButton("Abrir ficheiro")
         self.btnReproducir = QPushButton("Reproducir ficheiro")
@@ -72,10 +72,10 @@ class FiestraPrincipal(QMainWindow):
         layout_principal.addLayout(layout_fila2)
 
         # Tercera fila: Opciones de reproducción y texto
-        layout_fila3 = QHBoxLayout()
-        layout_fila3.addWidget(opcionsReproduccion)
-        layout_fila3.addWidget(self.tedCadroTexto)
-        layout_principal.addLayout(layout_fila3)
+        #layout_fila3 = QHBoxLayout()
+        #layout_fila3.addWidget(opcionsReproduccion)
+        #layout_fila3.addWidget(self.tedCadroTexto)
+        #layout_principal.addLayout(layout_fila3)
 
         # Cuarta fila: Saltar
         layout_fila4 = QHBoxLayout()
