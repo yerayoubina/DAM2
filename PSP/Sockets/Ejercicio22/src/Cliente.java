@@ -5,11 +5,11 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Cliente {
-    public static void main(String[] args) {
-        try {
-            Scanner sc = new Scanner(System.in);
+public class Cliente implements Runnable{
 
+    @Override
+    public void run() {
+        try {
             System.out.println("Creando socket cliente");
             Socket clientSocket = new Socket();
 
@@ -21,13 +21,18 @@ public class Cliente {
             OutputStream os = clientSocket.getOutputStream();
 
             for (int i = 1; i <= 3; i++) {
-                String mensaje = sc.nextLine(); // mensaje a mandar
-                os.write(mensaje.getBytes());   // mandar mensaje a través del outputStream
-                System.out.println("- Mensaje enviado: " +"Mensaje " + i + " desde cliente ->  " +  mensaje);
+                Scanner sc = new Scanner(System.in);
 
-                byte[] respuesta = new byte[100]; // almacenamiento para la respuesta del servidor
-                is.read(respuesta); // leer respuesta del servidor
-                System.out.println("- Respuesta recibida: " + new String(respuesta).trim() + "\n");
+                String mensaje = "Mensaje " + i + " desde cliente ->  " + sc.nextLine();
+
+                os.write(mensaje.getBytes());
+
+                System.out.println("\n- Mensaje enviado: " + mensaje);
+
+                byte[] respuesta = new byte[100];
+                is.read(respuesta);
+
+                System.out.println("- Respuesta recibida: " + new String(respuesta).trim());
             }
 
             System.out.println("\nCerrando el socket cliente");

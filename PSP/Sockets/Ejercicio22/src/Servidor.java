@@ -5,8 +5,10 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Servidor {
-    public static void main(String[] args) {
+public class Servidor implements  Runnable{
+
+    @Override
+    public void run() {
         try {
             System.out.println("Creando socket servidor");
             ServerSocket serverSocket = new ServerSocket();
@@ -23,11 +25,13 @@ public class Servidor {
             OutputStream os = newSocket.getOutputStream();
 
             for (int i = 1; i <= 3; i++) {
-                byte[] mensaje = new byte[100]; // almacenamiento para la petición de cliente
-                is.read(mensaje); // leer petición del cliente
+                byte[] mensaje = new byte[100];
 
-                String respuesta = "Leído " + i + " desde servidor -> " + new String(mensaje).trim(); // mensaje de vuelta a modo de check
-                os.write(respuesta.getBytes()); // mandar mensaje
+                is.read(mensaje);
+
+                System.out.println("Mensaje reci------------------------bido: " + new String(mensaje).trim());
+                String respuesta = "Mensaje " + i + " desde servidor";
+                os.write(respuesta.getBytes());
 
                 System.out.println("- Mensaje enviado: " + respuesta);
             }
