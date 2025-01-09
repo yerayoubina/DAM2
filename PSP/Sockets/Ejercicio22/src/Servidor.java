@@ -1,48 +1,41 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
 
 public class Servidor implements  Runnable{
 
     @Override
     public void run() {
         try {
-            System.out.println("Creando socket servidor");
+            // Sockets
             ServerSocket serverSocket = new ServerSocket();
-
-            System.out.println("Realizando el bind");
             InetSocketAddress addr = new InetSocketAddress("localhost", 6666);
             serverSocket.bind(addr);
-
-            System.out.println("Aceptando conexiones");
             Socket newSocket = serverSocket.accept();
 
-            System.out.println("Conexión recibida");
-            InputStream is = newSocket.getInputStream();
-            OutputStream os = newSocket.getOutputStream();
+            System.out.println(" CONEXION RECIBIDA!!!");
 
-            for (int i = 1; i <= 3; i++) {
-                byte[] mensaje = new byte[100];
+            //Streams
+            ObjectOutputStream oos = new ObjectOutputStream(newSocket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(newSocket.getInputStream());
 
-                is.read(mensaje);
+            //Leer ArrayList
+            List<Integer> listaRecibida = (List<Integer>) ois.readObject();
 
-                System.out.println("Mensaje reci------------------------bido: " + new String(mensaje).trim());
-                String respuesta = "Mensaje " + i + " desde servidor";
-                os.write(respuesta.getBytes());
 
-                System.out.println("- Mensaje enviado: " + respuesta);
-            }
+            //Operar con stream y enviar suma
+            oos.writeObject(listaRecibida.stream().mapToInt(Integer::intValue).sum());
 
-            System.out.println("Cerrando el nuevo socket");
+            //Closes
+            ois.close();
+            oos.close();
             newSocket.close();
-            System.out.println("Cerrando el socket servidor");
             serverSocket.close();
-            System.out.println("Terminado");
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
