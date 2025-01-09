@@ -2,13 +2,16 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 public class Servidor implements  Runnable{
 
     @Override
     public void run() {
+        operacionServidor();
+    }
+
+    private static void operacionServidor() {
         try {
             // Sockets
             ServerSocket serverSocket = new ServerSocket();
@@ -26,7 +29,7 @@ public class Servidor implements  Runnable{
             List<Integer> listaRecibida = (List<Integer>) ois.readObject();
 
 
-            //Operar con stream y enviar suma
+            //Operar con stream() y enviar suma
             oos.writeObject(listaRecibida.stream().mapToInt(Integer::intValue).sum());
 
             //Closes

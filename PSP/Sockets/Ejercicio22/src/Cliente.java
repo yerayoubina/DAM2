@@ -10,14 +10,13 @@ public class Cliente implements Runnable{
     @Override
     public void run() {
         operacionCliente();
-
     }
 
     private static void operacionCliente() {
         try {
             System.out.print("Estableciendo la conexión al servidor ");
 
-            // Simula timepo
+            // Simula tiempo
             temporizador(2500);
 
             //Realiza la conexión
@@ -46,6 +45,8 @@ public class Cliente implements Runnable{
             oos.close();
             clientSocket.close();
 
+            System.out.println("\nBye, bye");
+
         } catch (IOException | ClassNotFoundException | InterruptedException ex) {
             System.err.println(ex.getMessage());
         }
@@ -64,7 +65,7 @@ public class Cliente implements Runnable{
     }
 
     /**
-     * Esta función simula un temporizador para dar la sensación de que la conexión al servidor es un proceso costoso. A su vez garatinza que la petición del cliente no se establece antes de que el servidor esté disponible
+     * Esta función simula un temporizador para dar la sensación de que la conexión al servidor es un proceso costoso. A su vez garatinza que la petición del cliente no se establece antes de que el servidor esté disponible.
      * @param milisegundos tiempo de espera
      */
     private static void temporizador(long milisegundos) throws InterruptedException {
