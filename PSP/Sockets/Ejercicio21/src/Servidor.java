@@ -23,11 +23,14 @@ public class Servidor {
             OutputStream os = newSocket.getOutputStream();
 
             for (int i = 1; i <= 3; i++) {
-                byte[] mensaje = new byte[25];
+                byte[] mensaje = new byte[100];
+
                 is.read(mensaje);
-                System.out.println("Mensaje recibido: " + new String(mensaje).trim());
+
+                System.out.println("Mensaje reci------------------------bido: " + new String(mensaje).trim());
                 String respuesta = "Mensaje " + i + " desde servidor";
                 os.write(respuesta.getBytes());
+
                 System.out.println("- Mensaje enviado: " + respuesta);
             }
 
