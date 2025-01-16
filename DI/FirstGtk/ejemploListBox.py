@@ -21,8 +21,7 @@ class ListBoxWindow(Gtk.Window):
 
         box_outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.add(box_outer)
-
-        listbox = Gtk.ListBox()
+gListBox()
         listbox.set_selection_mode(Gtk.SelectionMode.NONE)
         box_outer.pack_start(listbox, True, True, 0)
 
