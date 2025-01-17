@@ -27,13 +27,11 @@ public class ServidorUDP implements Runnable {
             //Procesar el mensaje recibido
             String msj = new String(peticion.getData(), 0, peticion.getLength());
 
-            //Determinar la plabra más larga (Lo voy a hacer con un map, guardo su longitud como valor y posteriormente lo recorro)
+            //Determinar la plabra más larga (recorrer Array de msj y ternario para acutalizar el pMaxLength)
                 String pMaxLength = "";
-
             for (String p : msj.split(",")) {
                 pMaxLength = pMaxLength.length() < p.length() ? p : pMaxLength ;
             }
-
 
             System.out.println("Servidor -> Enviada Palabra más larga de " + Arrays.toString(msj.split(",")));
 
