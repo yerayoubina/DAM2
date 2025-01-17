@@ -5,6 +5,5 @@ public class Main {
         Thread clienteH = new Thread(new ClienteUDP());
 
         serverH.start();
-        clienteH.start();
     }
 }

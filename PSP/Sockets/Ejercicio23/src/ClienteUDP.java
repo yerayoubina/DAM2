@@ -31,7 +31,7 @@ public class ClienteUDP implements Runnable{
 
             //Procesa la respuesta
             String msjServidor = new String(miRespuesta.getData(),0 , miRespuesta.getLength());
-            System.out.println("Cliente: " + msjServidor);
+            System.out.println("Cliente -> " + msjServidor);
 
             //close
             datagramSocket.close();

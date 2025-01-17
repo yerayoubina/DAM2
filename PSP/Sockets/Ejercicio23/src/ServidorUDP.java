@@ -24,7 +24,7 @@ public class ServidorUDP implements Runnable{
 
             //Procesar el mensaje recibido
             String msj = new String(peticion.getData(), 0 , peticion.getLength());
-            System.out.println("Servidor: " + msj);
+            System.out.println("Servidor -> " + msj);
 
             //Obetener la informacion del cliente
             int puertoCliente = peticion.getPort();
