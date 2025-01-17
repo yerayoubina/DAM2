@@ -1,0 +1,1 @@
+Crea una aplicación cliente servidor utilizando DatagramSockets donde el cliente envía una lista de palabras al servidor. El servidor recibe las palabras, encuentra la más larga y le devuelve la palabra y la longitud de la misma al cliente.
