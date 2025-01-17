@@ -44,12 +44,9 @@ public class ServidorUDP implements Runnable {
             bufferEnviar = msjServidor.getBytes();
             DatagramPacket respuesta = new DatagramPacket(bufferEnviar, bufferEnviar.length, direccion, puertoCliente);
 
-            // Enviar la respuesta al cliente
+            // Enviar la respuesta al cliente y cerrar
             datagramSocket.send(respuesta);
-
             datagramSocket.close();
-
-
         } catch (IOException ex) {
             ex.getMessage();
         }

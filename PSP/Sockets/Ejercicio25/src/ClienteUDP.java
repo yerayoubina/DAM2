@@ -44,13 +44,11 @@ public class ClienteUDP implements Runnable{
                 String msjServidor = new String(miRespuesta.getData(),0 , miRespuesta.getLength());
                 System.out.println("Cliente -> Respuesta servidor: " + msjServidor);
 
-
-
             //close
             datagramSocket.close();
 
         } catch (SocketException ex) {
-            ex.printStackTrace();
+            ex.getMessage();
         } catch (IOException ex) {
             Logger.getLogger(ClienteUDP.class.getName()).log(Level.SEVERE, null, ex);
         }
