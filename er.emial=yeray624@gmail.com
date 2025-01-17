@@ -1,0 +1,16 @@
+user.emial=yeray624@gmail.com
+user.email=yeray.oubina.rey@gmail.com
+user.name=Yeray
+init.defaultbranch=main
+http.sslbackend=gnutls
+core.autocrlf=input
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/yerayoubina/DAM2.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
+user.mail=yeray.oubina.rey@gmail.com
+user.email=yeray.oubina.rey@gmail.com
