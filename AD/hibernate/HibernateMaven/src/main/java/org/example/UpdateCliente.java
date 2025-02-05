@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class GuardaClientePrueba {
+public class UpdateCliente {
 
     public static void main(String[] args) {
         // Crear SessionFactory y vincularlo a un mapeo
@@ -15,27 +15,24 @@ public class GuardaClientePrueba {
 
         //CREATE
         try {
-            Cliente cliente1 = new Cliente("Jimmy", "Chicote", "Sagasta");
-            ss.beginTransaction();
-            ss.persist(cliente1);
-            ss.getTransaction().commit();
-            System.out.println("Cliente insertado en la base de datos");
+            //int clienteID = 1;
 
             ss.beginTransaction();
 
-            System.out.println("Lectura del registro con ID"+ cliente1.getId());
+            //Cliente c = ss.get(Cliente.class, clienteID);
 
-            Cliente clienteInsertado = ss.get(Cliente.class, cliente1.getId());
+            //c.setApellidos("Gutierrez");
 
-            System.out.println("Registro: " + clienteInsertado);
+            ss.createMutationQuery("DELETE Cliente WHERE id = 3").executeUpdate();
 
             ss.getTransaction().commit();
+
 
             System.out.println("Terminado!");
             ss.close();
 
         } catch (Exception e) {
-            ss.getTransaction().rollback();
+
             ss.close();
             System.out.println(e.getMessage());
         }
