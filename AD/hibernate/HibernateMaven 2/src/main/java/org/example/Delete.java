@@ -12,16 +12,28 @@ public class Delete {
         Session ss = null;
 
         try{
+            /*
+
+             */
             ss = sf.openSession();
             ss.beginTransaction();
 
-            Cliente c = ss.get(Cliente.class, 3);
+            Cliente c = ss.get(Cliente.class, 31);
+            Detalles_cliente cd = ss.get(Detalles_cliente.class, 1);
 
             if(c!=null){
                 ss.remove(c);
                 System.out.println("<-- Cliente ELIMINADO -->");
             }else {
                 System.out.println("<-- NO SE HA PODIDO ACCEDER AL CLIENTE -->");
+
+            }
+
+            if(cd!=null){
+                ss.remove(cd);
+                System.out.println("<-- DETALLE-CLIENTE ELIMINADO -->");
+            }else {
+                System.out.println("<-- NO SE HA PODIDO ACCEDER AL DETALLE CLIENTE -->");
 
             }
 

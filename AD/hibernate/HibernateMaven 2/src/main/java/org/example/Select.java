@@ -12,7 +12,7 @@ public class Select {
             Session ss = sf.openSession();
 
             // Obtener detalles_cliente
-            Detalles_cliente dc = ss.get(Detalles_cliente.class, 1);
+            Detalles_cliente dc = ss.get(Detalles_cliente.class, 16);
 
             System.out.println(dc);
 
@@ -22,7 +22,8 @@ public class Select {
             // Close the session
             ss.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+
         }
     }
 
