@@ -21,6 +21,10 @@ public class Detalles_cliente {
     @Column(name = "comentarios")
     private String comentarios;
 
+    @OneToOne(mappedBy = "detalles_cliente",cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Cliente cliente;
+
     public Detalles_cliente(){}
 
     public Detalles_cliente(String web, String tfn, String comentarios) {
@@ -59,5 +63,23 @@ public class Detalles_cliente {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Detalles_cliente{" +
+                "web='" + web + '\'' +
+                ", tfn='" + tfn + '\'' +
+                ", comentarios='" + comentarios + '\'' +
+                ", cliente=" + cliente.getNombre() +
+                '}';
     }
 }

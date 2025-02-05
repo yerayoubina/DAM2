@@ -18,7 +18,7 @@ public class Insert {
             Detalles_cliente cDetalles = new Detalles_cliente("www.pildoras.com", "777373","Es Profesor");
 
             //Asociar objetos
-            c1.setDetalLesCliente(cDetalles);
+            c1.setDetalles_cliente(cDetalles);
 
             ss.beginTransaction();
             ss.persist(c1);
