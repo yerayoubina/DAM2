@@ -65,7 +65,7 @@ public class Cliente implements Runnable{
     }
 
     /**
-     * Esta función simula un temporizador para dar la sensación de que la conexión al servidor es un proceso costoso. A su vez garatinza que la petición del cliente no se establece antes de que el servidor esté disponible.
+     * Esta función simula un temporizador para dar la sensación de que la conexión al servidor es un proceso costoso. A su vez garatinza que la petición del cliente no se establezca antes de que el servidor esté disponible.
      * @param milisegundos tiempo de espera
      */
     private static void temporizador(long milisegundos) throws InterruptedException {
