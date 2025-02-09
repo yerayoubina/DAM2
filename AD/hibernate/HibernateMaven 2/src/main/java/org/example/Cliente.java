@@ -3,6 +3,9 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name ="clientes")
 public class Cliente {
@@ -24,6 +27,9 @@ public class Cliente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Detalles_cliente detalles_cliente;
+
+    @OneToMany(mappedBy = "cliente") // atributo en pedido
+    private List<Pedido> pedidos;
 
     public Cliente(){}
 
@@ -89,5 +95,19 @@ public class Cliente {
                 ", apellidos='" + apellidos + '\'' +
                 ", dicreccion='" + direccion + '\'' +
                 '}';
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public void addPedido(Pedido p){
+        if(pedidos == null) pedidos = new ArrayList<>();
+        pedidos.add(p);
+        p.setCliente(this); // Referencia este clietne con el pedido
     }
 }

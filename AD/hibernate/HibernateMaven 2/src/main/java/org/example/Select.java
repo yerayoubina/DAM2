@@ -12,7 +12,7 @@ public class Select {
             Session ss = sf.openSession();
 
             // Obtener detalles_cliente
-            Detalles_cliente dc = ss.get(Detalles_cliente.class, 16);
+            Detalles_cliente dc = ss.get(Detalles_cliente.class, 2);
 
             System.out.println(dc);
 
