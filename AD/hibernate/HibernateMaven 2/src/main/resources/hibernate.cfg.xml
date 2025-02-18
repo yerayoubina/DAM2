@@ -29,5 +29,6 @@
         <!-- <mapping resource="your_mapping_file.hbm.xml"/> -->
         <mapping class="org.example.Cliente"/>
         <mapping class="org.example.Detalles_cliente"/>
+        <mapping class="org.example.Pedido"/>
     </session-factory>
 </hibernate-configuration>
