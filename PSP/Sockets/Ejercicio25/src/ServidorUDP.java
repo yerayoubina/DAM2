@@ -40,7 +40,7 @@ public class ServidorUDP implements Runnable {
             InetAddress direccion = peticion.getAddress();
 
             //Enviar la respuesta
-            String msjServidor = "Palabra más larga " + pMaxLength;
+            String msjServidor = "Palabra más larga " + pMaxLength + " - Longitud: " + pMaxLength.length();
             bufferEnviar = msjServidor.getBytes();
             DatagramPacket respuesta = new DatagramPacket(bufferEnviar, bufferEnviar.length, direccion, puertoCliente);
 
